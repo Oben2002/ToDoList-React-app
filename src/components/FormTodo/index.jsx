@@ -2,6 +2,8 @@ import React from "react";
 import { Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../App.css";
+import PropTypes from 'prop-types';
+
 
 
 
@@ -22,11 +24,11 @@ function FormTodo({ addTodo }) {
     return (
       <Form onSubmit={handleSubmit}> 
       <Form.Group>
-        <Form.Label><b>Add New Task</b></Form.Label>
-        <Form.Control type="text" className="input" value={text} onChange={e => setText(e.target.value)} placeholder="Add new todo" />
+        <Form.Label for="text"><b>Add New Task</b></Form.Label>
+        <Form.Control id="text" type="text" className="input" value={text} onChange={e => setText(e.target.value)} placeholder="Add new todo" />
         <br></br>
-        <Form.Label><b>Add Date to task</b></Form.Label>
-        <Form.Control type="date" className="input" value={date} onChange={e => setDate(e.target.value)}  />
+        <Form.Label for="date"><b>Add Date to task</b></Form.Label>
+        <Form.Control id="date" type="date" className="input" value={date} onChange={e => setDate(e.target.value)}  />
       </Form.Group>
       <br></br>
       <Button variant="secondary mb-3" type="submit">
@@ -34,6 +36,11 @@ function FormTodo({ addTodo }) {
       </Button>
     </Form>
     );
+  }
+
+  FormTodo.propTypes = {
+    addTodo: PropTypes.func.isRequired,
+    
   }
 
   export default FormTodo
