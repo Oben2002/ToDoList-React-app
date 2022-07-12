@@ -24,10 +24,10 @@ function FormTodo({ addTodo }) {
     return (
       <Form onSubmit={handleSubmit}> 
       <Form.Group>
-        <Form.Label for="text"><b>Add New Task</b></Form.Label>
+        <Form.Label htmlFor="text"><b>Add New Task</b></Form.Label>
         <Form.Control id="text" type="text" className="input" value={text} onChange={e => setText(e.target.value)} placeholder="Add new todo" />
         <br></br>
-        <Form.Label for="date"><b>Add Date to task</b></Form.Label>
+        <Form.Label htmlFor="date"><b>Add Date to task</b></Form.Label>
         <Form.Control id="date" type="date" className="input" value={date} onChange={e => setDate(e.target.value)}  />
       </Form.Group>
       <br></br>

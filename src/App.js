@@ -32,14 +32,34 @@ function App() {
   const updateTodo = index => {
     const newTodos = [...todos];
     const item = newTodos[index];
-    let newText = prompt(`Update ${item.text}?`, item.text);
-    let todoObj = { text: newText, date:item.date };
-    newTodos.splice(index, 1, todoObj);
-    if (newText === null || newText === "") {
-      return;
-      } else {
-      item.text = newText;
-      }
+    let choice = prompt(`Enter 1 to update task or 2 to update date`);
+    console.log(choice);
+
+    if (choice==='1'){
+      console.log(choice);
+      let newText = prompt(`Update ${item.text}?`, item.text);
+      let todoObj = { text: newText, date:item.date };
+      newTodos.splice(index, 1, todoObj);
+      if (newText === null || newText === "") {
+        return;
+        } else {
+        item.text = newText;
+        }
+    }
+    else if (choice==='2'){
+      let newDate = prompt(`Update ${item.date}  ?`, item.date);
+      let todoObj = { text: item.text, date:newDate };
+      newTodos.splice(index, 1, todoObj);
+      if (newDate === null || newDate === "") {
+        return;
+        } else {
+        item.date = newDate;
+        }
+    }
+    else {
+      alert(`Wrong choice --- Retry`);    
+    }
+    
     setTodos(newTodos);
 
   };
