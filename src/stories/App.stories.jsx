@@ -1,35 +1,34 @@
-import Todo from '../components/Todo';
+import App from '../App';
 import React from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
-//import {markTodo, addTodo,updateTodo, removeTodo} from '../App';
 
 
 export default {
     title: 'Todo',
-    component: Todo,
+    component: App,
     parameters: {
         layout: 'fullscreen',
     },
-    argTypes: { markTodo: { action: "markTodo" } }
-
 
 }
 
-const Template = (args) => <Todo {...args} />;
+const Template = () => <App  />;
 
-export const Default= Template.bind({})
+export const Default= Template.bind({});
 Default.args={
-    todo: {
+    todos: [
+        {
         text: "This is a sampe todo",
         date:"2022-07-21",
         isDone: false
       },
-    index:0, 
-    markTodo: ()=> {
-
-        }
-
+      {
+        text: "This is a sampe todo",
+        date:"2022-07-21",
+        isDone: false
+      },
+    ]
 }
 
 export const listWithItems= Template.bind({});

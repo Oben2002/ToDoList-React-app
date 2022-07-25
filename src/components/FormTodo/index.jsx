@@ -31,7 +31,7 @@ function FormTodo({ addTodo }) {
         <Form.Control id="date" type="date" className="input" value={date} onChange={e => setDate(e.target.value)}  />
       </Form.Group>
       <br></br>
-      <Button variant="secondary mb-3" type="submit">
+      <Button variant="secondary mb-3" id="button" onClick={e=>handleSubmit(e)}>
         Submit
       </Button>
     </Form>

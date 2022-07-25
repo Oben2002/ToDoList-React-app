@@ -13,7 +13,7 @@ export default {
 
 const Template = (args) => <FormTodo {...args} />;
 
-export const emptyForm= Template.bind({});
+export const staticForm= Template.bind({});
 
 export const FilledForm= Template.bind({});
 
