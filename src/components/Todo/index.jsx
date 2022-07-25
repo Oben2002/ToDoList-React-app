@@ -88,7 +88,7 @@ function Todo({ todos, markTodo, removeTodo, updateTodo}) {
         <Form onSubmit={handleSubmit}> 
       <Form.Group>
         <Form.Label htmlFor="text"><b>Modify Task</b></Form.Label>
-        <Form.Control id="text" type="text" className="input" defaultValue={text} onChange={e => setTask(e.target.value)} placeholder="Add new todo" />
+        <Form.Control id="text" type="text" className="input" defaultValue={text} onChange={e => setTask(e.target.value)}  />
         <br></br>
         <Form.Label htmlFor="date"><b>Modify Date to task</b></Form.Label>
         <Form.Control id="date" type="date" className="input" defaultValue={date} onChange={e => setDate(e.target.value)}  />
