@@ -28,7 +28,7 @@ function App() {
     newTodos.splice(index, 1);
     setTodos(newTodos);
   };
-
+/* 
   const updateTodo = (index,texts,dates) => {
     const newTodos = [...todos];
     const item = newTodos[index];
@@ -44,7 +44,7 @@ function App() {
         }
         setTodos(newTodos);
 
-      };
+      }; */
   
   
 
@@ -60,7 +60,6 @@ function App() {
                 todos={todos}
                 markTodo={markTodo}
                 removeTodo={removeTodo}
-                updateTodo={updateTodo}
                 />
               </Card.Body>
             </Card>

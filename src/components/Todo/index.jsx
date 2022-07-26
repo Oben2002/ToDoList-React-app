@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {useSortableData} from '../../hooks/useSortableData';
 
 
-function Todo({ todos, markTodo, removeTodo, updateTodo}) {
+function Todo({ todos, markTodo, removeTodo}) {
 
   const [show, setShow] = useState(false);
   const [newDate, setDate]=useState("");
@@ -15,6 +15,8 @@ function Todo({ todos, markTodo, removeTodo, updateTodo}) {
   const [text, setText]=useState("");
   const [index, setIndex]=useState("");
   const {items,requestSort,sortConfig } = useSortableData(todos);
+  
+todos= items;
 
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
@@ -32,17 +34,45 @@ function Todo({ todos, markTodo, removeTodo, updateTodo}) {
                     setIndex(index);
 
                      } 
-                      
-  const handleSubmit = e => {
+   
+
+    const updateTodo = (index,texts,dates) => {
+    var newTodos = [...todos];
+    var item = newTodos[index];
+    const chText=item.text;
+    const chDate=item.date;
+
+    console.log(dates);
+      
+      if (texts ==="") {
+        texts= chText;
+      } 
+      if (dates===""){
+        dates= chDate;
+      }
+      
+        item.text = texts;
+        item.date = dates;
+        console.log('ok');
+
+        //let todoObj = { text: texts, date:dates };
+        newTodos.splice(index, 1, item);
+       
+    
+        console.log(newTodos);
+        todos=newTodos;
+
+      };
+
+    const handleSubmit = e => {
     e.preventDefault();
     if (!newTask & !newDate) return;
     updateTodo(index,newTask,newDate);
     setTask("");
     setDate("");
+    console.log(todos);
 
   };
-
-
 
     return (
 
@@ -64,7 +94,7 @@ function Todo({ todos, markTodo, removeTodo, updateTodo}) {
         </tr>
       </thead>
       <tbody>
-        {items.map((todo, index) => (
+        {todos.map((todo, index) => (
           <tr key={index} index={index}>
             <td style={{ textDecoration: todo.isDone ? "line-through" : "" }}>{todo.date}</td>
             <td style={{ textDecoration: todo.isDone ? "line-through" : "" }}>{todo.text}</td>
