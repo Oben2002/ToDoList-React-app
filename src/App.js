@@ -18,14 +18,25 @@ function App() {
     setTodos(newTodos);
   };
   
-  const markTodo = index => {
+  const markTodo = (isDone,text) => {
     const newTodos = [...todos];
-    newTodos[index].isDone = !newTodos[index].isDone
+    isDone = !isDone;
+    console.log(text);
+    for (var i=0; i<newTodos.length; i++){
+      if(newTodos[i].text===text){
+        newTodos[i].isDone=isDone;
+      }
+    }
+    console.log(newTodos);
     setTodos(newTodos);
   };
-  const removeTodo = index => {
+  const removeTodo = (text,date) => {
     const newTodos = [...todos];
-    newTodos.splice(index, 1);
+    for (var i=0; i<newTodos.length; i++){
+      if(newTodos[i].text===text && newTodos[i].date===date){
+        newTodos.splice(i, 1);
+      }
+    }
     setTodos(newTodos);
   };
 /* 

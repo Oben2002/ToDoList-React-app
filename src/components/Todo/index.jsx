@@ -79,31 +79,29 @@ todos= items;
 
       <div className="todo">
         <table>
-      <caption>Tasks</caption>
-      <thead>
-        <tr>
-          <th><button type="button" onClick={() => requestSort('date')} className={getClassNamesFor('date')}
->
-              Date
-            </button></th>
-          <th><button type="button" onClick={() => requestSort('text')} className={getClassNamesFor('text')}
->
-              Task
-            </button></th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {todos.map((todo, index) => (
-          <tr key={index} index={index}>
-            <td style={{ textDecoration: todo.isDone ? "line-through" : "" }}>{todo.date}</td>
-            <td style={{ textDecoration: todo.isDone ? "line-through" : "" }}>{todo.text}</td>
-            <td><Button variant="outline-success" onClick={() => markTodo(index)}>✓</Button>{' '}
-          <Button variant="outline-primary" onClick= {() => handleShow(todo.text,todo.date,index)}>Update </Button>{' '}
-          <Button variant="outline-danger" onClick={() => removeTodo(index)}>✕</Button></td>
-          </tr>
-        ))}
-      </tbody>
+          <caption>Tasks</caption>
+          <thead>
+            <tr>
+              <th><button type="button" onClick={() => requestSort('date')} className={getClassNamesFor('date')}>
+                  Date
+                </button></th>
+              <th><button type="button" onClick={() => requestSort('text')} className={getClassNamesFor('text')}>
+                  Task
+                </button></th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {todos.map((todo, index) => (
+              <tr key={index} index={index}>
+                <td style={{ textDecoration: todo.isDone ? "line-through" : "" }}>{todo.date}</td>
+                <td style={{ textDecoration: todo.isDone ? "line-through" : "" }}>{todo.text}</td>
+                <td><Button variant="outline-success" onClick={() => markTodo(todo.isDone,todo.text)}>✓</Button>{' '}
+              <Button variant="outline-primary" onClick= {() => handleShow(todo.text,todo.date,index)}>Update </Button>{' '}
+              <Button variant="outline-danger" onClick={() => removeTodo(todo.text,todo.date)}>✕</Button></td>
+              </tr>
+            ))}
+          </tbody>
     </table>
 {/*         <span style={{ textDecoration: todo.isDone ? "line-through" : "" }}>{todo.date}</span>
         <span style={{ textDecoration: todo.isDone ? "line-through" : "" }}>{todo.text}</span> */}
