@@ -64,45 +64,93 @@ function App() {
   
   const [todos, setTodos] = useState([
     {
+      id:uuidv4(),
       text: "This is a sampe todo",
       date:"2022-07-21",
       isDone: false
     }
   ]);
-  const itemsFromBackend =[
+  /* const itemsFromBackend =[
     {id:uuidv4(), content:'First task'},
     {id:uuidv4(), content:'Second task'},
     {id:uuidv4(), content:'Third task'},
     {id:uuidv4(), content:'Fourth task'},
   
-  ];
-  const columnsFromBackend = {
-    [uuidv4()]: {
+  ]; */
+  console.log(todos);
+  const [itemsFromBackend, setItems]=useState(todos);
+    
+  console.log("before itemsFromBackend:", itemsFromBackend);
+
+  
+  const columnsFromBackend = [
+    {
       name: "Requested",
-      items: itemsFromBackend
+      items: itemsFromBackend,
+      id:uuidv4()
     },
-    [uuidv4()]: {
+     {
       name: "To do",
-      items: []
+      items: [],
+      id:uuidv4()
     },
-    [uuidv4()]: {
+     {
       name: "In Progress",
-      items: []
+      items: [],
+      id:uuidv4()
     },
-    [uuidv4()]: {
+    {
       name: "Done",
-      items: []
+      items: [],
+      id:uuidv4()
     }
-  };
+  ];
   const [columns, setColumns]=useState(columnsFromBackend);
+  console.log("columns:" ,columnsFromBackend);
+
+  console.log("type::" ,typeof columnsFromBackend);
+  
+
+
+
+
+  const currentRequestedId= columnsFromBackend.findIndex(e=>e.name==="Requested");
+  console.log(currentRequestedId);
+ 
   
   
   
   
   
-  const addTodo = (text,date )=> {
-    const newTodos = [...todos, { text ,date}];
+  
+  const addTodo = (text,date,id)=> {
+    const newTodos = [...todos, { id,text ,date}];
+    console.log("newTodos",newTodos);
+
     setTodos(newTodos);
+    setItems(newTodos);
+    console.log("itemsFromBackend:", itemsFromBackend);
+    
+    setColumns({
+      ...columns,
+      0: {
+        ...columns,
+        items: newTodos
+      }
+    });
+    console.log("animan:",columns);
+   
+    /* setColumns({
+      ...columns,
+      [id]: {
+        ...sourceColumn,
+        items: sourceItems
+      },
+      [destination.droppableId]: {
+        ...destColumn,
+        items: destItems
+      }
+    }); */
   };
   
   const markTodo = index => {
@@ -114,6 +162,13 @@ function App() {
     const newTodos = [...todos];
     newTodos.splice(index, 1);
     setTodos(newTodos);
+    setColumns({
+      ...columns,
+      0: {
+        ...columns,
+        items: newTodos
+      }
+    });
   };
 
   const updateTodo = (index,texts,dates) => {
@@ -130,6 +185,13 @@ function App() {
         item.date = dates;
         }
         setTodos(newTodos);
+        setColumns({
+          ...columns,
+          0: {
+            ...columns,
+            items: newTodos
+          }
+        });
 
       };
       // const onDrop = useCallback(acceptedFiles => {
@@ -157,8 +219,8 @@ function App() {
       <div className="container">
         <h1 className="text-center mb-4">My Agenda</h1>
         <FormTodo addTodo={addTodo} />
-        <div>
-            <Card>
+        <div style={{ margin: 15 }}>
+            <Card >
               <Card.Body>
                 <Todo
                 todos={todos}
@@ -184,8 +246,10 @@ function App() {
               }}
               key={columnId}
             >
+              
+              <div style={{ margin: 15 }}>
               <h2>{column.name}</h2>
-              <div style={{ margin: 8 }}>
+
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
@@ -226,7 +290,7 @@ function App() {
                                       ...provided.draggableProps.style
                                     }}
                                   >
-                                    {item.content}
+                                    {item.text}
                                   </div>
                                 );
                               }}

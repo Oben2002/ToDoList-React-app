@@ -68,9 +68,9 @@ function Todo({ todos, markTodo, removeTodo, updateTodo}) {
           <tr key={index} index={index}>
             <td style={{ textDecoration: todo.isDone ? "line-through" : "" }}>{todo.date}</td>
             <td style={{ textDecoration: todo.isDone ? "line-through" : "" }}>{todo.text}</td>
-            <td><Button variant="outline-success" onClick={() => markTodo(index)}>✓</Button>{' '}
+            <td><Button variant="outline-success" onClick={() => markTodo(index,todo.text)}>✓</Button>{' '}
           <Button variant="outline-primary" onClick= {() => handleShow(todo.text,todo.date,index)}>Update </Button>{' '}
-          <Button variant="outline-danger" onClick={() => removeTodo(index)}>✕</Button></td>
+          <Button variant="outline-danger" onClick={() => removeTodo(index,todo.text)}>✕</Button></td>
           </tr>
         ))}
       </tbody>

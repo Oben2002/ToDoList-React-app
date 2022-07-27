@@ -3,6 +3,8 @@ import { Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../App.css";
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 
@@ -15,7 +17,8 @@ function FormTodo({ addTodo }) {
     const handleSubmit = e => {
       e.preventDefault();
       if (!text & !date) return;
-      addTodo(text,date);
+      const id=uuidv4();
+      addTodo(text,date,id);
       setText("");
       setDate("");
 
