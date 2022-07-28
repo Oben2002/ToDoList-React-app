@@ -170,7 +170,7 @@ function App() {
       }
     });
   };
-
+/* 
   const updateTodo = (index,texts,dates) => {
     const newTodos = [...todos];
     const item = newTodos[index];
@@ -193,25 +193,8 @@ function App() {
           }
         });
 
-      };
-      // const onDrop = useCallback(acceptedFiles => {
-      //   // Loop through accepted files
-      //   acceptedFiles.map(file => {
-      //     // Initialize FileReader browser API
-      //     const reader = new FileReader();
-      //     // onload callback gets called after the reader reads the file data
-      //     reader.onload = function(e) {
-      //       // add the image into the state. Since FileReader reading process is asynchronous, its better to get the latest snapshot state (i.e., prevState) and update it. 
-      //       setImages(prevState => [
-      //         ...prevState,
-      //         { id: cuid(), src: e.target.result }
-      //       ]);
-      //     };
-      //     // Read the file as Data URL (since we accept only images)
-      //     reader.readAsDataURL(file);
-      //     return file;
-      //   });
-      // }, []);
+      }; */
+  
   
 
   return (
@@ -226,7 +209,6 @@ function App() {
                 todos={todos}
                 markTodo={markTodo}
                 removeTodo={removeTodo}
-                updateTodo={updateTodo}
                 />
                 
               </Card.Body>
