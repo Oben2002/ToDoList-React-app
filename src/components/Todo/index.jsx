@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {useSortableData} from '../../hooks/useSortableData';
 
 
-function Todo({ todos, markTodo, removeTodo}) {
+function Todo({ todos, markTodo, removeTodo,updateTodo}) {
 
   const [show, setShow] = useState(false);
   const [newDate, setDate]=useState("");
@@ -36,33 +36,7 @@ todos= items;
                      } 
    
 
-    const updateTodo = (index,texts,dates) => {
-    var newTodos = [...todos];
-    var item = newTodos[index];
-    const chText=item.text;
-    const chDate=item.date;
-
-    console.log(dates);
-      
-      if (texts ==="") {
-        texts= chText;
-      } 
-      if (dates===""){
-        dates= chDate;
-      }
-      
-        item.text = texts;
-        item.date = dates;
-        console.log('ok');
-
-        //let todoObj = { text: texts, date:dates };
-        newTodos.splice(index, 1, item);
-       
     
-        console.log(newTodos);
-        todos=newTodos;
-
-      };
 
     const handleSubmit = e => {
     e.preventDefault();

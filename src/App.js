@@ -128,17 +128,23 @@ function App() {
     console.log("newTodos",newTodos);
 
     setTodos(newTodos);
+
+    const news = [...columns[0].items, { id,text ,date}];
+    
     setItems(newTodos);
+    
+    
     console.log("itemsFromBackend:", itemsFromBackend);
     
     setColumns({
       ...columns,
       0: {
         ...columns,
-        items: newTodos
+        name:"Requested",
+        items: news
       }
     });
-    console.log("animan:",columns);
+    console.log("columns when added:",columns);
    
     /* setColumns({
       ...columns,
@@ -158,42 +164,146 @@ function App() {
     newTodos[index].isDone = !newTodos[index].isDone
     setTodos(newTodos);
   };
-  const removeTodo = index => {
+  const removeTodo = (index, text) => {
     const newTodos = [...todos];
+    const itemsCol1 = [...columns[0].items];
+    const itemsCol2 = [...columns[1].items];
+    const itemsCol3 = [...columns[2].items];
+    const itemsCol4 = [...columns[3].items];
+
+
+    for (var i in itemsCol1){
+      if (itemsCol1[i].text===text){
+        itemsCol1.splice(i,1);
+        console.log(itemsCol1);
+      }  
+    }
+    for (var j in itemsCol2){
+      if (itemsCol2[j].text===text){
+        itemsCol2.splice(j,1);
+        console.log(itemsCol2);
+      }  
+    }
+    for (var k in itemsCol3){
+      if (itemsCol3[k].text===text){
+        itemsCol3.splice(k,1);
+        console.log(itemsCol3);
+      }  
+    }
+    for (var l in itemsCol4){
+      if (itemsCol4[l].text===text){
+        itemsCol4.splice(l,1);
+        console.log(itemsCol4);
+      }  
+    }
+
+
     newTodos.splice(index, 1);
+
     setTodos(newTodos);
     setColumns({
       ...columns,
       0: {
         ...columns,
-        items: newTodos
+        name:"Requested",
+        items: itemsCol1
+      },
+      1: {
+        ...columns,
+        name:"To do",
+        items: itemsCol2
+      },
+      2: {
+        ...columns,
+        name:"In Progress",
+        items: itemsCol3
+      },
+      3: {
+        ...columns,
+        name:"Done",
+        items: itemsCol4
       }
     });
   };
-/* 
   const updateTodo = (index,texts,dates) => {
-    const newTodos = [...todos];
-    const item = newTodos[index];
+    var newTodos = [...todos];
+    var item = newTodos[index];
+    const chText=item.text;
+    const chDate=item.date;
+
       
-      if (texts === "" || dates === "") {
-        return;
-        } 
-      else {
-        let todoObj = { text: texts, date:dates };
-        newTodos.splice(index, 1, todoObj);
+      if (texts ==="") {
+        texts= chText;
+      } 
+      if (dates===""){
+        dates= chDate;
+      }
+      
         item.text = texts;
         item.date = dates;
-        }
-        setTodos(newTodos);
-        setColumns({
-          ...columns,
-          0: {
-            ...columns,
-            items: newTodos
-          }
-        });
+        //let todoObj = { text: texts, date:dates };
+        newTodos.splice(index, 1, item);
+        console.log(newTodos);
 
-      }; */
+        const itemsCol1 = [...columns[0].items];
+    const itemsCol2 = [...columns[1].items];
+    const itemsCol3 = [...columns[2].items];
+    const itemsCol4 = [...columns[3].items];
+
+
+    for (var i in itemsCol1){
+      if (itemsCol1[i].text===texts && itemsCol1[i].date===dates){
+        itemsCol1.splice(i,1,item);
+        console.log("itemsCol1:",itemsCol1);
+      }  
+    }
+    for (var j in itemsCol2){
+      if (itemsCol2[j].text===texts && itemsCol2[j].date===dates){
+        itemsCol2.splice(j,1,item);
+        console.log(itemsCol2);
+      }  
+    }
+    for (var k in itemsCol3){
+      if (itemsCol3[k].text===texts && itemsCol3[k].date===dates){
+        itemsCol3.splice(k,1,item);
+        console.log(itemsCol3);
+      }  
+    }
+    for (var l in itemsCol3){
+      if (itemsCol3[l].text===texts && itemsCol3[l].date===dates){
+        itemsCol3.splice(l,1,item);
+        console.log(itemsCol4);
+      }  
+    }
+
+
+
+    setTodos(newTodos);
+    setColumns({
+      ...columns,
+      0: {
+        ...columns,
+        name:"Requested",
+        items: itemsCol1
+      },
+      1: {
+        ...columns,
+        name:"To do",
+        items: itemsCol2
+      },
+      2: {
+        ...columns,
+        name:"In Progress",
+        items: itemsCol3
+      },
+      3: {
+        ...columns,
+        name:"Done",
+        items: itemsCol4
+      }
+    });
+
+      };
   
   
 
@@ -209,12 +319,22 @@ function App() {
                 todos={todos}
                 markTodo={markTodo}
                 removeTodo={removeTodo}
+                updateTodo={updateTodo}
                 />
                 
               </Card.Body>
             </Card>
             <Card>
-            <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+              <Card.Body style={{ display: "flex", justifyContent: "center", height: "100%",margin:0}}>
+              
+              
+            
+                </Card.Body>
+
+                </Card>
+      <Card>
+        <Card.Body>
+        <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns)}
       >
@@ -223,15 +343,13 @@ function App() {
             <div
               style={{
                 display: "flex",
-                flexDirection: "column",
+                    flexDirection: "column",
                 alignItems: "center"
               }}
               key={columnId}
             >
-              
-              <div style={{ margin: 15 }}>
               <h2>{column.name}</h2>
-
+              <div style={{ margin: 8 }}>
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
@@ -290,20 +408,14 @@ function App() {
         })}
       </DragDropContext>
     </div>
-              
-              {/* <DragAndDrop onDrop={onDrop} accept={"image/png"}/>
-              {images && images.length > 0 && (
-                <h3 className="text-center">Drag the Images to change positions</h3>
-              )}
-              
-                <ImageList images={images} /> */}
+        </Card.Body>
               
 
             </Card>
           
         </div>
       </div>
-    </div>
+      </div>
   );
 }
 
